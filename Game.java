@@ -11,8 +11,11 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Michael Kölling and David J. Barnes (original)
+ * @version 2016.02.29 (original)
+ * 
+ * @author Max Micheler
+ * @version 3/14/2022
  */
 
 public class Game 
@@ -27,6 +30,15 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+    }
+    
+    /**
+     * Invokes game within BlueJ by instantiating the Game class
+     * and invoking play() method
+     */
+    public static void main (String[] args){
+        Game game = new Game();
+        game.play();
     }
 
     /**
@@ -43,6 +55,17 @@ public class Game
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
         
+        //initialise room foods
+        outside.setFood("pear");
+        
+        theater.setFood("apple");
+        
+        pub.setFood("pint");
+        
+        lab.setFood("chocolate");
+        
+        office.setFood("mouse");
+                
         // initialise room exits
         outside.setExit("east", theater);
         outside.setExit("south", lab);
@@ -114,6 +137,14 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
+                
+            case LOOK:
+                look(command);
+                break;
+            
+            case FOOD:
+                food(command);
+                break;
 
             case QUIT:
                 wantToQuit = quit(command);
@@ -162,6 +193,22 @@ public class Game
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+    }
+    
+    /**
+     * look around the room
+     */
+    private void look(Command command)
+    {
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
+    /**
+     * looks to see if there are any light switches
+     */
+    private void food(Command command)
+    {
+        System.out.println(currentRoom.getFoodDescription());
     }
 
     /** 

@@ -46,41 +46,107 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room gate, courtYard, garden, shed, lobby, guestArea, 
+        servantKitchen, ballRoom, staircase, leftWing, 
+        rightWing, library, office, bedroomB, bedroomA, balkony;
       
+        
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        gate = new Room("at the front gate");
+            
+        courtYard = new Room("in the courtyard, shadowed by the towering mansion");
         
-        //initialise room foods
-        outside.setFood("pear");
-        
-        theater.setFood("apple");
-        
-        pub.setFood("pint");
-        
-        lab.setFood("chocolate");
-        
-        office.setFood("mouse");
+        garden = new Room("in the garden where giant dead trees loom over you");
                 
+        shed = new Room("in the shed of the gardener");
+        
+        lobby = new Room("in the lobby");
+        
+        guestArea = new Room("in the guest area");
+        
+        servantKitchen = new Room("in the servant kitchen");
+        
+        ballRoom = new Room("in the ball room, where you can hear faint music");
+        
+        staircase = new Room("on the staircase");
+        
+        leftWing = new Room("in the left wing with giant torn portraits on either side");
+        
+        rightWing = new Room("in the right wing with a balkony at the end");
+        
+        library = new Room("in the library, where you cant help but sneeze");
+         
+        office = new Room("in the office, and for some reason its very tidy");
+         
+        bedroomB = new Room("in bedroom B where there seems to be a lump under the sheets");
+        
+        bedroomA = new Room("in bedroom A");
+         
+        balkony = new Room("on the balkony which doesn't look safe");
+        
+        //Sample Code
+        // = new Room("");
+         
+        //initialise room foods
+        gate.setFood("a pear");
+        
+        courtYard.setFood("a pineapple");
+           
+        //Sample Code
+        //.setFood("");
+        
+        
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        gate.setExit("north", courtYard);
+        
+        courtYard.setExit("south", gate);
+        courtYard.setExit("west", garden);
+        courtYard.setExit("east", shed);
+        courtYard.setExit("north", lobby);
+        
+        garden.setExit("east", courtYard);
+        
+        shed.setExit("west", courtYard);
+        
+        lobby.setExit("south", courtYard);
+        lobby.setExit("west", guestArea);
+        lobby.setExit("east", ballRoom);
+        lobby.setExit("north", staircase);
+        
+        guestArea.setExit("west", servantKitchen);
+        guestArea.setExit("east", lobby);
+        
+        servantKitchen.setExit("east", guestArea);
+        
+        ballRoom.setExit("west", lobby);
+        
+        staircase.setExit("south", lobby);
+        staircase.setExit("west", leftWing);
+        staircase.setExit("east", rightWing);
 
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
-
-        currentRoom = outside;  // start game outside
+        leftWing.setExit("south", library);
+        leftWing.setExit("east", staircase);
+        leftWing.setExit("north", bedroomB);
+        
+        library.setExit("north", leftWing);
+        
+        bedroomB.setExit("south", leftWing);
+        
+        rightWing.setExit("south", office);
+        rightWing.setExit("west", staircase);
+        rightWing.setExit("east", balkony);
+        rightWing.setExit("north", bedroomA);
+        
+        bedroomA.setExit("south", rightWing);
+        
+        office.setExit("north", rightWing);
+        
+        balkony.setExit("west", rightWing);
+            
+        //Sample Code
+        //.setExit("", );
+               
+        currentRoom = gate;  // start game gate
     }
 
     /**
@@ -107,8 +173,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to the Virtual Mansion!");
+        System.out.println("The Virtual Mansion awaits.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -145,6 +211,10 @@ public class Game
             case FOOD:
                 food(command);
                 break;
+                
+            case EAT:
+                eat(command);
+                break;
 
             case QUIT:
                 wantToQuit = quit(command);
@@ -162,9 +232,8 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
+        System.out.println("You are wandering around this mansion alone, ");
+        System.out.println("careful not to fall. \n");
         System.out.println("Your command words are:");
         parser.showCommands();
     }
@@ -209,6 +278,14 @@ public class Game
     private void food(Command command)
     {
         System.out.println(currentRoom.getFoodDescription());
+    }
+    
+    /**
+     * lets you eat the food in the current room
+     */
+    private void eat(Command command)
+    {
+        System.out.println(currentRoom.eatFood());
     }
 
     /** 

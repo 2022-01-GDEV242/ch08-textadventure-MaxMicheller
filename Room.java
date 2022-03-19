@@ -53,6 +53,14 @@ public class Room
     {
         this.foods = food;
     }
+    
+    /**
+     * Eating of the food in the current room.
+     */
+    public String eatFood()
+    {
+        return "You ate " + getFoodString() + " " + description;
+    }
 
     /**
      * @return The short description of the room
@@ -71,7 +79,22 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        if(foods == null){
+            return "You are " + description + ".\n" + getExitString();
+        }else{
+            return "You are " + description + " and have found " + 
+                getFoodString() + ".\n" + getExitString();
+        }
+    }
+    
+    /**
+     * Return a description of the food in the form:
+     *      You found a pear outside the main enterance of the university.
+     * @return a description of the food in the room.
+     */
+    public String getFoodDescription()
+    {
+        return "You found " + getFoodString() + " " + description;
     }
 
     /**
@@ -96,20 +119,13 @@ public class Room
      */
     private String getFoodString()
     {
-        String returnString = foods;        
+        String returnString = foods;   
+        if (foods == null){
+            returnString = "nothing";
+        }
         return returnString;
     }
-    
-    /**
-     * Return a description of the food in the form:
-     *      You found a pear outside the main enterance of the university.
-     * @return a description of the food in the room.
-     */
-    public String getFoodDescription()
-    {
-        return "You found a(n) " + getFoodString() + " " + description + ".";
-    }
-
+        
      /**
      * Return the room that is reached if we go from this room in direction
      * "direction". If there is no room in that direction, return null.

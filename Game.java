@@ -256,19 +256,21 @@ public class Game
         String direction = command.getSecondWord();
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
-        if(previousRoom == null){
-            if(direction == "back"){
+        int num = 0;
+        if(previousRoom == null && direction.equals("back")){
                 System.out.println("Back to where?");
-            }
+                num++;
         }        
-        else if (command.getSecondWord() == "back") {
+        else  if(direction.equals("back")){
             currentRoom = previousRoom;
+            num++;
             System.out.println(currentRoom.getLongDescription());
         }
-        else if (nextRoom == null) {
+        if(nextRoom == null && num != 1) {
             System.out.println("There is no door!");
+            
         }
-        else {
+        else if(num != 1) {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }

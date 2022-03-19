@@ -22,6 +22,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room previousRoom;
         
     /**
      * Create the game and initialise its internal map.
@@ -145,7 +146,9 @@ public class Game
             
         //Sample Code
         //.setExit("", );
-               
+        
+        //set the previous room to the current room
+        previousRoom = currentRoom;
         currentRoom = gate;  // start game gate
     }
 
@@ -249,19 +252,27 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
+        
         String direction = command.getSecondWord();
-
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
+        if(previousRoom == null){
+            if(direction == "back"){
+                System.out.println("Back to where?");
+            }
+        }        
+        else if (command.getSecondWord() == "back") {
+            currentRoom = previousRoom;
+            System.out.println(currentRoom.getLongDescription());
+        }
+        else if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+        previousRoom = currentRoom;
     }
     
     /**

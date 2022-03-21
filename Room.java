@@ -70,6 +70,13 @@ public class Room
     {
         return description;
     }
+    
+    /**
+     * returns the short description
+     */
+    public String toString(){
+        return getShortDescription();
+    }
 
     /**
      * Return a description of the room in the form:

@@ -24,6 +24,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Item heldItem;
     private Stack <Room> history;
         
     /**
@@ -32,7 +33,7 @@ public class Game
     public Game() 
     {
         history = new Stack<>();
-        createRooms();
+        createWorld();
         parser = new Parser();
     }
     
@@ -44,19 +45,24 @@ public class Game
         Game game = new Game();
         game.play();
     }
-
-    /**
+    
+     /**
      * Create all the rooms and link their exits together.
      */
-    private void createRooms()
+    private void createWorld()
     {
         Room gate, courtYard, garden, shed, lobby, guestArea, 
         servantKitchen, ballRoom, staircase, leftWing, 
         rightWing, library, office, bedroomB, bedroomA, balkony;
+        
+        Item banana;
       
         
-        // create the rooms
+        // create the rooms and items along with putting the item in the room.
         gate = new Room("at the front gate");
+        banana = new Item("a banana", 3);
+        gate.setItem(banana);
+        
             
         courtYard = new Room("in the courtyard, shadowed by the towering mansion");
         
@@ -87,17 +93,6 @@ public class Game
         bedroomA = new Room("in bedroom A");
          
         balkony = new Room("on the balkony which doesn't look safe");
-        
-        //Sample Code
-        // = new Room("");
-         
-        //initialise room foods
-        gate.setFood("a pear");
-        
-        courtYard.setFood("a pineapple");
-           
-        //Sample Code
-        //.setFood("");
         
         
         // initialise room exits
@@ -146,10 +141,7 @@ public class Game
         office.setExit("north", rightWing);
         
         balkony.setExit("west", rightWing);
-            
-        //Sample Code
-        //.setExit("", );
-               
+                       
         currentRoom = gate;  // start game gate
     }
 
@@ -161,14 +153,13 @@ public class Game
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-                
+        // execute them until the game is over.                
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing.  Good bye.\n\n\n\n");
     }
 
     /**
@@ -178,7 +169,7 @@ public class Game
     {
         System.out.println();
         System.out.println("Welcome to the Virtual Mansion!");
-        System.out.println("The Virtual Mansion awaits.");
+        System.out.println("The Virtual Mansion awaits.\n");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -211,17 +202,13 @@ public class Game
             case LOOK:
                 look(command);
                 break;
-            
-            case FOOD:
-                food(command);
-                break;
-                
-            case EAT:
-                eat(command);
-                break;
-                
+                            
             case BACK:
                 back(command);
+                break;
+                
+            case HAT:
+                hat(command);
                 break;
 
             case QUIT:
@@ -242,7 +229,7 @@ public class Game
     {
         System.out.println("You are wandering around this mansion alone, ");
         System.out.println("careful not to fall. \n");
-        System.out.println("Your command words are:");
+        System.out.print("Your command words are:   ");
         parser.showCommands();
     }
 
@@ -281,23 +268,7 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
     }
     
-    /**
-     * looks to see if there are any light switches
-     */
-    private void food(Command command)
-    {
-        System.out.println(currentRoom.getFoodDescription());
-    }
-    
-    /**
-     * lets you eat the food in the current room
-     */
-    private void eat(Command command)
-    {
-        System.out.println(currentRoom.eatFood());
-    }
-    
-    /**
+     /**
      * goes back one room at a time.
      */
     private void back(Command command){
@@ -326,4 +297,12 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+    
+    /**
+     * looks if you have a hat.
+     */
+    private void hat(Command command){
+        System.out.println("Sadly, you dont have a hat.");
+    }
+    
 }

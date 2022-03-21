@@ -4,6 +4,8 @@ C:
 Priting of available commands was implemented already
     -8.16 (p 305) - Streamline printing of available commands
     
+Made a hat command
+    -8.15 (p 303) - add another command, ie. eat with a simple text response 
     
 
 B:
@@ -13,3 +15,7 @@ Added the back command
 Added the back multiple command utalizing stacks
     -8.26 - implement the go back many rooms version of the command command (back repeatedly retraces your steps)
 
+Added items to the rooms and each room can have an item with a description
+    -8.20/8.21 (p 308) - add items to your game. Each room can have one item in it. 
+        Items have description and weight. When printing room info, Item should be included
+        

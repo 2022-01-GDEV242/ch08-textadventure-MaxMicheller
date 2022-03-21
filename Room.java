@@ -20,7 +20,6 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private String foods;        // stores foods of this room.
 
     /**
      * Create a room described "description". Initially, it has
@@ -32,7 +31,6 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
-        foods = "";
     }
 
     /**
@@ -45,23 +43,6 @@ public class Room
         exits.put(direction, neighbor);
     }
     
-    /**
-     * Define a food from the current room.
-     * @param food The food of the current room.
-     */
-    public void setFood(String food)
-    {
-        this.foods = food;
-    }
-    
-    /**
-     * Eating of the food in the current room.
-     */
-    public String eatFood()
-    {
-        return "You ate " + getFoodString() + " " + description;
-    }
-
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
@@ -86,22 +67,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        if(foods == null){
             return "You are " + description + ".\n" + getExitString();
-        }else{
-            return "You are " + description + " and have found " + 
-                getFoodString() + ".\n" + getExitString();
-        }
-    }
-    
-    /**
-     * Return a description of the food in the form:
-     *      You found a pear outside the main enterance of the university.
-     * @return a description of the food in the room.
-     */
-    public String getFoodDescription()
-    {
-        return "You found " + getFoodString() + " " + description;
     }
 
     /**
@@ -115,20 +81,6 @@ public class Room
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
             returnString += " " + exit;
-        }
-        return returnString;
-    }
-    
-    /**
-     * Return a string describing the room's food, for example
-     * "Foods: pear".
-     * @return Details of the room's foods.
-     */
-    private String getFoodString()
-    {
-        String returnString = foods;   
-        if (foods == null){
-            returnString = "nothing";
         }
         return returnString;
     }

@@ -90,15 +90,6 @@ public class Game
         
         //Sample Code
         // = new Room("");
-         
-        //initialise room foods
-        gate.setFood("a pear");
-        
-        courtYard.setFood("a pineapple");
-           
-        //Sample Code
-        //.setFood("");
-        
         
         // initialise room exits
         gate.setExit("north", courtYard);
@@ -211,15 +202,7 @@ public class Game
             case LOOK:
                 look(command);
                 break;
-            
-            case FOOD:
-                food(command);
-                break;
-                
-            case EAT:
-                eat(command);
-                break;
-                
+                            
             case BACK:
                 back(command);
                 break;
@@ -281,23 +264,7 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
     }
     
-    /**
-     * looks to see if there are any light switches
-     */
-    private void food(Command command)
-    {
-        System.out.println(currentRoom.getFoodDescription());
-    }
-    
-    /**
-     * lets you eat the food in the current room
-     */
-    private void eat(Command command)
-    {
-        System.out.println(currentRoom.eatFood());
-    }
-    
-    /**
+     /**
      * goes back one room at a time.
      */
     private void back(Command command){

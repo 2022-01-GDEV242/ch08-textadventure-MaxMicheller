@@ -42,6 +42,7 @@ public class Parser
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
+        System.out.println();
 
         // Find up to two words on the line.
         Scanner tokenizer = new Scanner(inputLine);

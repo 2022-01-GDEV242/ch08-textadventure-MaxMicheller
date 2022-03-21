@@ -1,16 +1,15 @@
 Features Added:
 
 C:
-Added a food command/eat command
-	-8.15 (p 303) - add another command, ie. eat with a simple text response
-
 Priting of available commands was implemented already
-	-8.16 (p 305) - Streamline printing of available commands
+    -8.16 (p 305) - Streamline printing of available commands
+    
+    
 
 B:
 Added the back command
-	-8.23 (p 309,310) - implement the back command (back one room)
+    -8.23 (p 309,310) - implement the back command (back one room)
 
 Added the back multiple command utalizing stacks
-	-8.26 - implement the go back many rooms version of the command command (back repeatedly retraces your steps)
+    -8.26 - implement the go back many rooms version of the command command (back repeatedly retraces your steps)
 

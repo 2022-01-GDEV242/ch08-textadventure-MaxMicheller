@@ -26,6 +26,7 @@ public class Game
     private Room currentRoom;
     private Item heldItem;
     private Stack <Room> history;
+    private int trapdoor = 0;
         
     /**
      * Create the game and initialise its internal map.
@@ -120,7 +121,7 @@ public class Game
         papaya = new Item("a papaya", 450);
         bedroomA.setItem(papaya);
 
-        balkony = new Room("on the balkony which doesn't look safe");
+        balkony = new Room(balconyDescrition());
         durian = new Item("a durian", 6800);
         balkony.setItem(durian);
         
@@ -170,6 +171,7 @@ public class Game
         office.setExit("north", rightWing);
         
         balkony.setExit("west", rightWing);
+        balkony.setExit("down", shed);
                        
         currentRoom = gate;  // start game gate
     }
@@ -294,7 +296,28 @@ public class Game
      */
     private void look(Command command)
     {
-        System.out.println(currentRoom.getLongDescription());
+        if (trapdoor == 1){
+            System.out.println("You look over the edge of of the balcony," +
+                " and before you knew it, you fell. ");
+            System.out.println(".\n.\n.\n.");
+            System.out.println("You look around and see tools scattered around and a hole " + 
+                "above your head. \nYou are lucky to be alive.\n");
+            
+            
+            String direction = "down";
+            // Try to leave current room.
+            Room nextRoom = currentRoom.getExit(direction);   
+            while(history.empty() != true)
+            {
+                history.pop();
+            }
+            //history.push(currentRoom);
+            currentRoom = nextRoom;
+                    
+            System.out.println(currentRoom.getLongDescription());
+        }else{
+            System.out.println(currentRoom.getLongDescription());
+        }
     }
     
      /**
@@ -334,4 +357,22 @@ public class Game
         System.out.println("Sadly, you dont have a hat.");
     }
     
+    private String balconyDescrition(){
+        if (trapdoor == 1) {
+            return "on the balkony which is now broken";
+        }
+        else{
+            trapdoor = 1;
+            return "on the balkony which doesn't look safe";
+       }
+    }
+    
+    private String shedDescrition(){
+        if (trapdoor == 1) {
+            return "in the shed of the gardener with a hole in the roof";
+        }
+        else{
+            return "in the shed of the gardener";
+        }
+    }
 }

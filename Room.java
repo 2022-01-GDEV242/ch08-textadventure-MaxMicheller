@@ -87,7 +87,11 @@ public class Room
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
-            returnString += " " + exit;
+            if(exit != "down"){ 
+                returnString += " " + exit;
+            }else{
+                return returnString;
+            }
         }
         return returnString;
     }
@@ -109,6 +113,5 @@ public class Room
     public void setItem(Item roomItem){
         this.roomItem = roomItem;
     }
-    
-}
+} 
 

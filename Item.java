@@ -8,9 +8,9 @@
 public class Item
 {
     private String description;
-    private int weight;
+    private float weight;
     
-    public Item(String description, int weight) 
+    public Item(String description, float weight) 
     {
         this.description = description;
         this.weight = weight;

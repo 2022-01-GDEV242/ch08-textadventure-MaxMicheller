@@ -55,45 +55,74 @@ public class Game
         servantKitchen, ballRoom, staircase, leftWing, 
         rightWing, library, office, bedroomB, bedroomA, balkony;
         
-        Item banana;
+        Item banana, apple, coconut, grapefruit, potato, tomato, watermelon,
+        lettuce, mango, onion, lemon, cauliflower, pumpkin, cucumber, papaya, durian;
       
         
-        // create the rooms and items along with putting the item in the room.
+        // create the rooms and items. giving items designated rooms and weights
         gate = new Room("at the front gate");
-        banana = new Item("a banana", 3);
+        banana = new Item("a banana", 120);
         gate.setItem(banana);
-        
-            
+         
         courtYard = new Room("in the courtyard, shadowed by the towering mansion");
+        apple = new Item("a apple", 195);
+        courtYard.setItem(apple);
         
         garden = new Room("in the garden where giant dead trees loom over you");
-                
+        coconut = new Item("a coconut", 680);
+        garden.setItem(coconut);
+        
         shed = new Room("in the shed of the gardener");
-        
+        grapefruit = new Item("a grapefruit", 246);
+        shed.setItem(grapefruit);
+
         lobby = new Room("in the lobby");
-        
+        potato = new Item("a potato", 184);
+        lobby.setItem(potato);
+
         guestArea = new Room("in the guest area");
-        
+        tomato = new Item("a tomato", 170);
+        guestArea.setItem(tomato);
+
         servantKitchen = new Room("in the servant kitchen");
-        
+        watermelon = new Item("a watermelon", 9000);
+        servantKitchen.setItem(watermelon);
+
         ballRoom = new Room("in the ball room, where you can hear faint music");
-        
+        lettuce = new Item("a lettuce", 800);
+        ballRoom.setItem(lettuce);
+
         staircase = new Room("on the staircase");
-        
+        mango = new Item("a mango", 200);
+        staircase.setItem(mango);
+
         leftWing = new Room("in the left wing with giant torn portraits on either side");
-        
+        onion = new Item("a onion", 160);
+        leftWing.setItem(onion);
+
         rightWing = new Room("in the right wing with a balkony at the end");
-        
+        lemon = new Item("a lemon", 100);
+        rightWing.setItem(lemon);
+
         library = new Room("in the library, where you cant help but sneeze");
-         
+        cauliflower = new Item("a cauliflower", 500);
+        library.setItem(cauliflower);
+
         office = new Room("in the office, and for some reason its very tidy");
-         
+        pumpkin = new Item("a pumpkin", 4500);
+        office.setItem(pumpkin);
+
         bedroomB = new Room("in bedroom B where there seems to be a lump under the sheets");
-        
+        cucumber = new Item("a cucumber", 250);
+        bedroomB.setItem(cucumber);
+
         bedroomA = new Room("in bedroom A");
-         
+        papaya = new Item("a papaya", 450);
+        bedroomA.setItem(papaya);
+
         balkony = new Room("on the balkony which doesn't look safe");
-        
+        durian = new Item("a durian", 6800);
+        balkony.setItem(durian);
         
         // initialise room exits
         gate.setExit("north", courtYard);

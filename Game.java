@@ -26,7 +26,6 @@ public class Game
     private Room currentRoom;
     private Item heldItem;
     private Stack <Room> history;
-    private int trapdoor = 0;
         
     /**
      * Create the game and initialise its internal map.
@@ -35,7 +34,7 @@ public class Game
     {
         history = new Stack<>();
         createWorld();
-        parser = new Parser();
+        parser = new Parser();        
     }
     
     /**
@@ -121,7 +120,7 @@ public class Game
         papaya = new Item("a papaya", 450);
         bedroomA.setItem(papaya);
 
-        balkony = new Room(balconyDescrition());
+        balkony = new Room("on the balkony which doesn't look safe");
         durian = new Item("a durian", 6800);
         balkony.setItem(durian);
         
@@ -296,12 +295,13 @@ public class Game
      */
     private void look(Command command)
     {
-        if (trapdoor == 1){
+        if (currentRoom.getShortDescription().equals("on the balkony which doesn't look safe"))
+        {
             System.out.println("You look over the edge of of the balcony," +
                 " and before you knew it, you fell. ");
             System.out.println(".\n.\n.\n.");
-            System.out.println("You look around and see tools scattered around and a hole " + 
-                "above your head. \nYou are lucky to be alive.\n");
+            System.out.println("You look around, seeing tools scattered around and a freshly made " + 
+                "hole in the roof.\nYou are lucky to be alive.\n");
             
             
             String direction = "down";
@@ -313,9 +313,10 @@ public class Game
             }
             //history.push(currentRoom);
             currentRoom = nextRoom;
-                    
+            
             System.out.println(currentRoom.getLongDescription());
-        }else{
+        }
+        else{
             System.out.println(currentRoom.getLongDescription());
         }
     }
@@ -355,24 +356,5 @@ public class Game
      */
     private void hat(Command command){
         System.out.println("Sadly, you dont have a hat.");
-    }
-    
-    private String balconyDescrition(){
-        if (trapdoor == 1) {
-            return "on the balkony which is now broken";
-        }
-        else{
-            trapdoor = 1;
-            return "on the balkony which doesn't look safe";
-       }
-    }
-    
-    private String shedDescrition(){
-        if (trapdoor == 1) {
-            return "in the shed of the gardener with a hole in the roof";
-        }
-        else{
-            return "in the shed of the gardener";
-        }
     }
 }

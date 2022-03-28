@@ -232,7 +232,7 @@ public class Game
                 break;
                 
             case LOOK:
-                look(command);
+                wantToQuit = look(command);
                 break;
                             
             case BACK:
@@ -303,31 +303,37 @@ public class Game
     /**
      * look around the room
      */
-    private void look(Command command)
+    private boolean look(Command command)
     {
         if (currentRoom.getShortDescription().equals("on the balkony which doesn't look safe"))
         {
-            System.out.println("You look over the edge of of the balcony," +
-                " and before you knew it, you fell. ");
-            System.out.println(".\n.\n.\n.");
-            System.out.println("You look around, seeing tools scattered around and a freshly made " + 
-                "hole in the roof.\nYou are lucky to be alive.\n");
-            
-            
-            String direction = "down";
-            // Try to leave current room.
-            Room nextRoom = currentRoom.getExit(direction);   
-            while(history.empty() != true)
-            {
-                history.pop();
+            health -= 9;
+            if(health <= 0){
+                System.out.println("You died.");
+                return true;
+            }else{
+                System.out.println("You look over the edge of of the balcony," +
+                    " and before you knew it, you fell. ");
+                System.out.println(".\n.\n.\n.");
+                System.out.println("You look around, seeing tools scattered around and a freshly made " + 
+                    "hole in the roof.\nYou are lucky to be alive.\n");
+                    
+                String direction = "down";
+                // Try to leave current room.
+                Room nextRoom = currentRoom.getExit(direction);   
+                while(history.empty() != true)
+                {
+                    history.pop();
+                }
+                //history.push(currentRoom);
+                currentRoom = nextRoom;            
+                System.out.println(currentRoom.getLongDescription());
+                return false;
             }
-            //history.push(currentRoom);
-            currentRoom = nextRoom;
-            
-            System.out.println(currentRoom.getLongDescription());
         }
         else{
             System.out.println(currentRoom.getLongDescription());
+            return false;
         }
     }
     
@@ -374,6 +380,7 @@ public class Game
      */
     private void eat(Command command){
         System.out.println(currentRoom.eatenItem());
+        health +=1;
         currentRoom.removeItem(); 
     }
     

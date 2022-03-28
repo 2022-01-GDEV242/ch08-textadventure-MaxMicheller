@@ -113,5 +113,19 @@ public class Room
     public void setItem(Item roomItem){
         this.roomItem = roomItem;
     }
+    
+    /**
+     * removes the item from the room.
+     */
+    public void removeItem(){
+        roomItem.removeItem();
+    }
+    
+    /**
+     * returns the eaten item string
+     */
+    public String eatenItem(){
+        return "You have eaten " + roomItem.getItemDescription();
+    }
 } 
 

@@ -240,6 +240,10 @@ public class Game
             case HAT:
                 hat(command);
                 break;
+                
+            case EAT:
+                eat(command);
+                break;
 
             case QUIT:
                 wantToQuit = quit(command);
@@ -356,5 +360,14 @@ public class Game
      */
     private void hat(Command command){
         System.out.println("Sadly, you dont have a hat.");
+    }
+    
+    /**
+     * eat the item in the room
+     * removes the item from the game
+     */
+    private void eat(Command command){
+        System.out.println(currentRoom.eatenItem());
+        currentRoom.removeItem(); 
     }
 }

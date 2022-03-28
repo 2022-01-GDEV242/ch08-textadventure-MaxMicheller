@@ -16,7 +16,15 @@ public class Item
         this.weight = weight;
     }
     
+    /**
+     * returns the description of the item.
+     */
     public String getItemDescription(){
+        return description;
+    }
+    
+    public String removeItem(){
+        description = "nothing";
         return description;
     }
 }

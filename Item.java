@@ -10,6 +10,9 @@ public class Item
     private String description;
     private float weight;
     
+    /** 
+     * initilizes the items, giving them descriptions and weights.
+     */
     public Item(String description, float weight) 
     {
         this.description = description;
@@ -17,12 +20,15 @@ public class Item
     }
     
     /**
-     * returns the description of the item.
+     * @return the description of the item.
      */
     public String getItemDescription(){
         return description;
     }
     
+    /**
+     * @return that the item has been removed.
+     */
     public String removeItem(){
         description = "nothing";
         return description;

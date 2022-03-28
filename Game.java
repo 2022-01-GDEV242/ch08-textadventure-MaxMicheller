@@ -26,6 +26,7 @@ public class Game
     private Room currentRoom;
     private Item heldItem;
     private Stack <Room> history;
+    private float health;
         
     /**
      * Create the game and initialise its internal map.
@@ -33,6 +34,7 @@ public class Game
     public Game() 
     {
         history = new Stack<>();
+        health = 10;
         createWorld();
         parser = new Parser();        
     }
@@ -244,6 +246,10 @@ public class Game
             case EAT:
                 eat(command);
                 break;
+                
+            case HEALTH:
+                health(command);
+                break;                
 
             case QUIT:
                 wantToQuit = quit(command);
@@ -369,5 +375,12 @@ public class Game
     private void eat(Command command){
         System.out.println(currentRoom.eatenItem());
         currentRoom.removeItem(); 
+    }
+    
+    /**
+     * shows the amount of health you have.
+     */
+    private void health(Command command){
+        System.out.println("You have " + health + " health.");
     }
 }

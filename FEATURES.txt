@@ -23,3 +23,7 @@ Added items to the rooms and each room can have an item with a description
 A:
 Added a trap door. one way be removing all the back options from the stack.
     -one way trap door
+
+Extra:
+Added a way to eat the items in the current room.
+
